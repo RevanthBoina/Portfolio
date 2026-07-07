@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rahul Lakhaney — Luxury Parallax Founder Story</title>
+  <meta name="description" content="Independent motion concept: a luxury Dubai-style parallax founder story for Rahul Lakhaney, Enrich Labs, Maximise.ai, InboxKit and AI agents." />
+  <style>
+    :root{
+      --black:#050507;
+      --black2:#09090d;
+      --gold:#f3d28b;
+      --gold2:#b8860b;
+      --blue:#38bdf8;
+      --cyan:#22d3ee;
+      --muted:rgba(255,255,255,.68);
+      --glass:rgba(12,12,16,.44);
+      --border:rgba(246,214,140,.22);
+      --ease:cubic-bezier(.19,1,.22,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;overflow:hidden;background:#050507;color:#fff;font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;}
+    body{
+      background:
+        radial-gradient(circle at 50% -20%, rgba(243,210,139,.18), transparent 42%),
+        radial-gradient(circle at 90% 110%, rgba(56,189,248,.12), transparent 38%),
+        linear-gradient(135deg,#080808 0%,#14100a 42%,#020203 100%);
+      display:grid;place-items:center;padding:2.5vh 3vw;
+    }
+    .stage{width:min(1480px,96vw);position:relative;}
+    .stage-top{display:flex;align-items:center;justify-content:space-between;margin:0 8px 14px;color:rgba(255,255,255,.72);font-size:12px;letter-spacing:.18em;text-transform:uppercase;}
+    .stage-top b{color:var(--gold);font-weight:650}.stage-top span:last-child{color:rgba(255,255,255,.42)}
+    .luxury-frame{
+      position:relative;height:86vh;min-height:650px;width:100%;overflow:hidden;border-radius:30px;background:#050507;
+      border:1px solid rgba(246,214,140,.24);
+      box-shadow:0 42px 160px rgba(0,0,0,.72), inset 0 0 0 1px rgba(255,255,255,.045);
+      isolation:isolate;
+    }
+    .scroll-viewport{height:100%;overflow:auto;scrollbar-width:none;overscroll-behavior:contain;scroll-behavior:auto;}
+    .scroll-viewport::-webkit-scrollbar{display:none}
+    .scroll-content{position:relative;background:#050507;}
+    .progress-track{position:absolute;top:0;left:0;right:0;height:3px;background:rgba(255,255,255,.08);z-index:50;overflow:hidden}
+    .progress-bar{height:100%;width:0;background:linear-gradient(90deg,#8a611b,#f8df9b,#38bdf8);box-shadow:0 0 24px rgba(243,210,139,.7);}
+
+    .chapter-indicator{position:absolute;left:22px;bottom:22px;z-index:60;display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:999px;background:rgba(5,5,7,.36);border:1px solid rgba(246,214,140,.18);backdrop-filter:blur(18px);box-shadow:0 16px 60px rgba(0,0,0,.32);pointer-events:none}
+    .chapter-indicator span{display:grid;place-items:center;width:30px;height:30px;border-radius:999px;background:linear-gradient(135deg,#8a611b,#f8df9b);color:#050507;font-size:11px;font-weight:850}.chapter-indicator strong{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.78)}
+    .scroll-viewport:focus{outline:none}.keyboard-hint{position:absolute;right:22px;bottom:22px;z-index:58;color:rgba(255,255,255,.38);font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:rgba(5,5,7,.28);border:1px solid rgba(255,255,255,.08);border-radius:999px;padding:10px 13px;backdrop-filter:blur(14px);pointer-events:none}
+    
+    .frame-grain{position:absolute;inset:0;z-index:45;pointer-events:none;opacity:.13;mix-blend-mode:soft-light;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E")}
+    .chapter-nav{position:absolute;z-index:60;right:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:13px;padding:12px;border:1px solid rgba(255,255,255,.09);border-radius:999px;background:rgba(5,5,7,.28);backdrop-filter:blur(18px)}
+    .chapter-nav button{width:36px;height:36px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:rgba(255,255,255,.58);cursor:pointer;font-size:11px;font-weight:700;transition:.35s var(--ease);position:relative}
+    .chapter-nav button:hover,.chapter-nav button.active{color:#050507;border-color:rgba(243,210,139,.95);background:linear-gradient(135deg,#8a611b,#f8df9b);transform:translateX(-3px);box-shadow:0 8px 34px rgba(243,210,139,.22)}
+    .chapter-nav button::after{content:attr(data-title);position:absolute;right:48px;top:50%;transform:translateY(-50%) translateX(8px);opacity:0;pointer-events:none;white-space:nowrap;background:rgba(5,5,7,.7);border:1px solid rgba(246,214,140,.18);color:white;border-radius:999px;padding:8px 12px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;transition:.25s var(--ease);backdrop-filter:blur(14px)}
+    .chapter-nav button:hover::after{opacity:1;transform:translateY(-50%) translateX(0)}
+    .scene{position:relative;height:100vh;min-height:720px;overflow:hidden;display:flex;align-items:center;}
+    .scene-bg-wrap{position:absolute;inset:-10%;z-index:0;overflow:hidden;}
+    .scene-bg{width:100%;height:100%;object-fit:cover;transform:scale(1.12);will-change:transform;filter:saturate(.98) contrast(1.05);}
+    .vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 50% 42%, rgba(0,0,0,.02), rgba(0,0,0,.62) 72%, rgba(0,0,0,.88)),linear-gradient(90deg,rgba(0,0,0,.82),rgba(0,0,0,.22) 42%,rgba(0,0,0,.7));}
+    .scene::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,.52),rgba(0,0,0,.08) 38%,rgba(0,0,0,.78));}
+    .scene-content{position:relative;z-index:3;width:100%;height:100%;display:flex;align-items:center;padding:clamp(34px,6vw,96px);will-change:transform,opacity,filter;}
+    .scene-content.right{justify-content:flex-end;text-align:left}.scene-content.center{justify-content:center;text-align:center}.scene-content.bottom{align-items:flex-end}.scene-content.split{justify-content:space-between;gap:40px}.scene-content.top{align-items:flex-start;padding-top:90px}
+    .copy{max-width:760px}.copy.narrow{max-width:620px}.copy.wide{max-width:980px}.copy.center{margin-inline:auto}.copy.right{margin-left:auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;margin:0 0 18px;color:var(--gold);font-weight:760;font-size:12px;letter-spacing:.2em;text-transform:uppercase}.eyebrow::before{content:"";width:42px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+    h1,h2,h3,p{margin:0}h1,.mega{font-size:clamp(56px,8vw,124px);line-height:.9;letter-spacing:-.075em;font-weight:760;text-wrap:balance;text-shadow:0 20px 70px rgba(0,0,0,.55)}
+    h2{font-size:clamp(42px,5.6vw,90px);line-height:.93;letter-spacing:-.065em;font-weight:750;text-wrap:balance;text-shadow:0 20px 60px rgba(0,0,0,.6)}
+    h3{font-size:clamp(26px,3vw,46px);line-height:1;letter-spacing:-.04em;font-weight:720}.gold{color:var(--gold)}.blue{color:var(--blue)}
+    .lead{font-size:clamp(17px,1.55vw,23px);line-height:1.55;color:var(--muted);max-width:720px;margin-top:22px;text-shadow:0 8px 40px rgba(0,0,0,.75)}
+    .small{font-size:14px;line-height:1.6;color:rgba(255,255,255,.62)}
+    .glass{background:var(--glass);border:1px solid var(--border);box-shadow:0 26px 90px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.06);backdrop-filter:blur(18px);border-radius:24px;}
+    .metric-grid{display:grid;grid-template-columns:repeat(2,minmax(160px,1fr));gap:14px;margin-top:34px;max-width:720px}.metric{padding:20px 20px 18px}.metric strong{display:block;font-size:clamp(30px,3.1vw,54px);letter-spacing:-.055em;line-height:1;color:#fff}.metric span{display:block;margin-top:8px;color:rgba(255,255,255,.6);font-size:13px;text-transform:uppercase;letter-spacing:.12em}.metric:hover,.product-card:hover,.chapter-card:hover,.chip:hover{border-color:rgba(243,210,139,.58);box-shadow:0 28px 110px rgba(184,134,11,.2);transform:translateY(-4px)}
+    .chapter-grid{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:18px;width:100%;max-width:1080px;margin:auto}.chapter-card{padding:28px 22px;min-height:190px;transition:.35s var(--ease);cursor:pointer}.chapter-card em{font-style:normal;color:var(--gold);font-size:12px;letter-spacing:.18em;text-transform:uppercase}.chapter-card h3{margin-top:44px;font-size:26px}.chapter-card p{margin-top:10px;color:rgba(255,255,255,.58);line-height:1.45;font-size:14px}
+    .profile-card{width:min(360px,36vw);min-height:420px;display:flex;align-items:flex-end;padding:28px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));position:relative;overflow:hidden}.profile-card::before{content:"RL";position:absolute;inset:34px;border-radius:22px;border:1px solid rgba(243,210,139,.18);display:grid;place-items:center;font-size:92px;font-weight:800;color:rgba(243,210,139,.18);letter-spacing:-.09em}.divider{height:1px;background:linear-gradient(90deg,var(--gold),rgba(255,255,255,.1),transparent);margin:28px 0;width:100%}
+    .chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px;max-width:760px}.chip{padding:12px 16px;border-radius:999px;transition:.35s var(--ease);font-size:14px;color:rgba(255,255,255,.8)}
+    .quote{font-size:clamp(42px,6.3vw,104px);line-height:.95;letter-spacing:-.07em;font-weight:780;text-wrap:balance}.quote-mark{color:rgba(243,210,139,.55)}
+    .timeline-line{position:absolute;left:50%;top:0;bottom:0;width:2px;background:rgba(255,255,255,.1);z-index:2;transform:translateX(-50%)}.timeline-line .fill{display:block;width:100%;height:var(--fill,0%);background:linear-gradient(var(--gold),var(--blue));box-shadow:0 0 20px rgba(243,210,139,.45)}
+    .timeline-card{max-width:560px;padding:26px;margin-top:26px}.date{color:var(--gold);font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:760}.timeline-card h3{margin-top:10px}.timeline-card p{margin-top:14px;color:rgba(255,255,255,.66);line-height:1.55}
+    .product-grid{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:16px;margin-top:34px}.product-card{padding:22px;min-height:170px;transition:.35s var(--ease)}.product-card .num{color:var(--gold);font-size:12px;letter-spacing:.18em}.product-card h3{font-size:25px;margin-top:30px}.product-card p{font-size:14px;color:rgba(255,255,255,.62);line-height:1.45;margin-top:10px}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px}.flow .glass{padding:18px;text-align:center;color:rgba(255,255,255,.78);font-weight:650;font-size:14px;position:relative}.flow .glass:not(:last-child)::after{content:"";position:absolute;right:-12px;top:50%;width:12px;height:1px;background:rgba(243,210,139,.5)}
+    .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}.btn{border:0;border-radius:999px;padding:15px 22px;font-weight:760;cursor:pointer;transition:.35s var(--ease);font-size:14px}.btn.gold{background:linear-gradient(135deg,#8f6a2a,#f3d28b,#8f6a2a);color:#070707}.btn.dark{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:white;backdrop-filter:blur(16px)}.btn:hover{transform:translateY(-3px);box-shadow:0 18px 60px rgba(243,210,139,.18)}
+    .scroll-cue{position:absolute;left:50%;bottom:32px;transform:translateX(-50%);z-index:5;display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.52);font-size:12px;letter-spacing:.14em;text-transform:uppercase}.scroll-cue i{display:block;width:20px;height:34px;border:1px solid rgba(246,214,140,.38);border-radius:999px;position:relative}.scroll-cue i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;border-radius:99px;background:var(--gold);transform:translateX(-50%);animation:wheel 1.6s infinite}@keyframes wheel{0%{opacity:0;transform:translate(-50%,0)}35%{opacity:1}100%{opacity:0;transform:translate(-50%,13px)}}
+    .disclaimer{margin-top:28px;padding:16px 18px;max-width:820px;color:rgba(255,255,255,.58);font-size:13px;line-height:1.55}.counter{font-variant-numeric:tabular-nums}
+    .reveal{opacity:0;transform:translateY(60px);filter:blur(10px);transition:1.1s var(--ease)}.scene.in-view .reveal{opacity:1;transform:translateY(0);filter:blur(0)}.scene.in-view .reveal.d2{transition-delay:.12s}.scene.in-view .reveal.d3{transition-delay:.24s}.scene.in-view .reveal.d4{transition-delay:.36s}
+    @media(max-width:980px){.keyboard-hint{display:none}.chapter-indicator{left:14px;bottom:14px}.chapter-indicator strong{display:none}body{padding:1.5vh 2vw}.stage-top{font-size:10px}.luxury-frame{height:90vh;min-height:0;border-radius:22px}.scene{min-height:680px}.chapter-nav{display:none}.scene-content{padding:34px;align-items:flex-end!important;justify-content:flex-start!important;text-align:left!important}.scene-content.split{display:flex;flex-direction:column;justify-content:center!important;align-items:flex-start!important}.chapter-grid,.product-grid,.metric-grid{grid-template-columns:1fr 1fr}.profile-card{width:100%;min-height:260px}.flow{grid-template-columns:1fr 1fr}h1,.mega{font-size:50px}h2{font-size:42px}.quote{font-size:42px}}
+    @media(max-width:620px){.stage-top span:last-child{display:none}.luxury-frame{height:91vh;border-radius:18px}.scene{min-height:720px}.scene-content{padding:24px}.chapter-grid,.product-grid,.metric-grid,.flow{grid-template-columns:1fr}.lead{font-size:16px}.copy{max-width:100%}.scene-bg{object-position:center}.metric strong{font-size:34px}.timeline-line{left:22px}.quote{font-size:36px}}
+  </style>
+</head>
+<body>
+  <main class="stage" aria-label="Rahul Lakhaney luxury parallax concept">
+    <div class="stage-top"><span><b>Rahul Lakhaney</b> — Independent Motion Concept</span><span>Scroll inside the frame</span></div>
+    <section class="luxury-frame" id="luxuryFrame">
+      <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+      <div class="chapter-indicator" id="chapterIndicator"><span>01</span><strong>Intro</strong></div>
+      <nav class="chapter-nav" aria-label="Chapter navigation">
+        <button data-target="scene-01" data-title="Intro" class="active">01</button>
+        <button data-target="scene-05" data-title="Founder">02</button>
+        <button data-target="scene-08" data-title="Journey">03</button>
+        <button data-target="scene-16" data-title="Products">04</button>
+        <button data-target="scene-21" data-title="Philosophy">05</button>
+        <button data-target="scene-24" data-title="Vision">06</button>
+      </nav>
+      <div class="keyboard-hint">Wheel / ↑ ↓ / Space</div>
+      <div class="frame-grain"></div>
+      <div class="scroll-viewport" id="scrollViewport" tabindex="0" aria-label="Internal cinematic scroll frame">
+        <div class="scroll-content" id="scrollContent">
+
+          <section class="scene" id="scene-01" data-chapter="Intro"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_01_intro_ceo_enrich_labs.png" alt="Luxury Dubai penthouse office at night"></div><div class="vignette"></div><div class="scene-content center"><div class="copy center"><div class="eyebrow reveal">Independent Motion Concept</div><h1 class="reveal d2">CO-FOUNDER &amp; CEO<br><span class="gold">ENRICH LABS</span></h1><p class="lead reveal d3">A cinematic founder-story concept built around data, AI, and bootstrapped SaaS momentum.</p></div><div class="scroll-cue"><i></i>Scroll inside frame</div></div></section>
+
+          <section class="scene" id="scene-02" data-chapter="Intro"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_02_founder_picture_name_area.png" alt="Founder reveal in luxury Dubai office"></div><div class="vignette"></div><div class="scene-content right"><div class="copy narrow right"><div class="eyebrow reveal">Founder Profile</div><h2 class="reveal d2">Rahul<br><span class="gold">Lakhaney</span></h2><p class="lead reveal d3">Serial entrepreneur. Growth leader. Bootstrapped SaaS builder.</p></div></div></section>
+
+          <section class="scene" id="scene-03" data-chapter="Intro"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_03_core_positioning_metrics_space.png" alt="Luxury Dubai boardroom for metrics"></div><div class="vignette"></div><div class="scene-content"><div class="copy wide"><div class="eyebrow reveal">Core Positioning</div><h2 class="reveal d2">Building high-velocity SaaS at the intersection of <span class="gold">data, AI, and growth.</span></h2><div class="metric-grid reveal d3"><div class="metric glass"><strong><span class="counter" data-target="200" data-prefix="$" data-suffix="K">$0K</span></strong><span>ARR in 4 weeks</span></div><div class="metric glass"><strong><span class="counter" data-target="10" data-prefix="$" data-suffix="M">$0M</span></strong><span>ARR in 5 months</span></div><div class="metric glass"><strong><span class="counter" data-target="12" data-prefix="$" data-suffix="M">$0M</span></strong><span>Bootstrapped ARR</span></div><div class="metric glass"><strong><span class="counter" data-target="9" data-suffix=" people">0 people</span></strong><span>Zero investors</span></div></div></div></div></section>
+
+          <section class="scene" id="scene-04" data-chapter="Intro"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_04_four_part_chapter_selection.png" alt="Luxury lounge with chapter panels"></div><div class="vignette"></div><div class="scene-content center"><div class="copy wide center"><div class="eyebrow reveal">Choose the Story</div><h2 class="reveal d2">Four cinematic chapters</h2><div class="chapter-grid reveal d3"><article class="chapter-card glass" data-jump="scene-05"><em>01</em><h3>The Founder</h3><p>Who Rahul is and what defines his public story.</p></article><article class="chapter-card glass" data-jump="scene-08"><em>02</em><h3>The Journey</h3><p>From early startups to bootstrapped SaaS milestones.</p></article><article class="chapter-card glass" data-jump="scene-16"><em>03</em><h3>The Products</h3><p>Maximise.ai, Enrich APIs, InboxKit, and AI agents.</p></article><article class="chapter-card glass" data-jump="scene-21"><em>04</em><h3>The Philosophy</h3><p>Bootstrapping, data as moat, culture, and vision.</p></article></div></div></div></section>
+
+          <section class="scene" id="scene-05" data-chapter="Founder"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_05_founder_profile_card_background.png" alt="Founder profile luxury background"></div><div class="vignette"></div><div class="scene-content split"><div class="profile-card glass reveal"><div><div class="date">Dubai-based builder</div><h3>Rahul Lakhaney</h3><p class="small" style="margin-top:12px">Stylized placeholder. Use approved public image only if you have rights.</p></div></div><div class="copy narrow"><div class="eyebrow reveal d2">The Founder</div><h2 class="reveal d3">A builder shaped by growth, product, and speed.</h2><div class="divider reveal d3"></div><p class="lead reveal d4">Rahul Lakhaney is a Dubai-based entrepreneur known publicly for building and scaling SaaS ventures across lead generation, data infrastructure, email deliverability, and AI marketing agents.</p></div></div></section>
+
+          <section class="scene" id="scene-06" data-chapter="Founder"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_06_founder_tags_keywords_space.png" alt="Luxury office keyword chips background"></div><div class="vignette"></div><div class="scene-content"><div class="copy wide"><div class="eyebrow reveal">Signals</div><h2 class="reveal d2">The public themes around the builder.</h2><div class="chips reveal d3"><span class="chip glass">Bootstrapped SaaS</span><span class="chip glass">Data APIs</span><span class="chip glass">AI Marketing</span><span class="chip glass">Growth Strategy</span><span class="chip glass">Cold Email Infrastructure</span><span class="chip glass">Building in Public</span><span class="chip glass">Product Leadership</span></div></div></div></section>
+
+          <section class="scene" id="scene-07" data-chapter="Founder"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_07_large_quote_wall.png" alt="Luxury quote wall"></div><div class="vignette"></div><div class="scene-content center"><div class="copy wide center"><div class="eyebrow reveal">Voice of the Founder</div><p class="quote reveal d2"><span class="quote-mark">“</span>$12M ARR.<br>Nine people.<br><span class="gold">Zero investors.</span><span class="quote-mark">”</span></p><p class="lead reveal d3 center">A public snapshot of Rahul’s bootstrapping philosophy and building-in-public style.</p></div></div></section>
+
+          <section class="scene" id="scene-08" data-chapter="Journey"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_08_timeline_intro_corridor.png" alt="Luxury corridor timeline intro"></div><div class="timeline-line"><span class="fill" id="timelineFill"></span></div><div class="vignette"></div><div class="scene-content center"><div class="copy center"><div class="eyebrow reveal">The Journey</div><h2 class="reveal d2">From early startups to AI-powered marketing infrastructure.</h2></div></div></section>
+
+          <section class="scene" id="scene-09" data-chapter="Journey"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_09_early_startup_wedding_app_phase.png" alt="Early startup desk"></div><div class="vignette"></div><div class="scene-content"><div class="timeline-card glass reveal"><div class="date">2015–2016</div><h3>Early Startup Phase</h3><p>Co-founded WhatAShaadi, an early wedding-app venture, marking the start of the public founder journey.</p></div></div></section>
+
+          <section class="scene" id="scene-10" data-chapter="Journey"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_10_growth_leadership_corporate_phase.png" alt="Growth leadership luxury strategy room"></div><div class="vignette"></div><div class="scene-content right"><div class="copy narrow right"><div class="date reveal">2018–2022</div><h2 class="reveal d2">Growth and Product Leadership</h2><p class="lead reveal d3">Senior growth and product roles across Rise, Pulse Q&amp;A, and Gartner built the foundation for scaling SaaS products.</p><div class="flow reveal d4"><div class="glass">Growth</div><div class="glass">Product</div><div class="glass">Leadership</div><div class="glass">Scale</div></div></div></div></section>
+
+          <section class="scene" id="scene-11" data-chapter="Journey"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_11_maximise_ai_launch_lead_growth.png" alt="Maximise.ai launch lead growth"></div><div class="vignette"></div><div class="scene-content"><div class="copy wide"><div class="date reveal">2024</div><h2 class="reveal d2">Maximise.ai Launch</h2><p class="lead reveal d3">A lead-generation platform focused on identifying anonymous website visitors and turning them into actionable leads.</p><div class="metric-grid reveal d4"><div class="metric glass"><strong><span class="counter" data-target="200" data-prefix="$" data-suffix="K">$0K</span></strong><span>ARR in 4 weeks</span></div><div class="metric glass"><strong>Visitor → Lead</strong><span>Anonymous signals enriched</span></div></div></div></div></section>
+
+          <section class="scene" id="scene-12" data-chapter="Journey"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_12_enrich_labs_data_foundation.png" alt="Enrich Labs data foundation"></div><div class="vignette"></div><div class="scene-content right"><div class="copy narrow right"><div class="date reveal">2024–2025</div><h2 class="reveal d2">Enrich Labs</h2><p class="lead reveal d3">A data and AI infrastructure company focused on contact data, enrichment, GTM systems, and AI marketing workflows.</p></div></div></section>
+
+          <section class="scene" id="scene-13" data-chapter="Journey"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_13_inboxkit_rebuild_rebrand.png" alt="InboxKit rebuild and rebrand"></div><div class="vignette"></div><div class="scene-content"><div class="copy narrow"><div class="date reveal">2025</div><h2 class="reveal d2">From InboxAutomate to InboxKit</h2><p class="lead reveal d3">A rebuild and rebrand story around cold-email infrastructure, deliverability, and operational simplicity.</p></div></div></section>
+
+          <section class="scene" id="scene-14" data-chapter="Journey"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_14_arr_milestone_luxury_metric_wall.png" alt="ARR milestone metric wall"></div><div class="vignette"></div><div class="scene-content center"><div class="copy center"><div class="eyebrow reveal">Bootstrapped Milestone</div><h2 class="mega reveal d2"><span class="counter" data-target="10" data-prefix="$" data-suffix="M">$0M</span> ARR</h2><p class="lead reveal d3 center">Reported in five months after the rebuild, with public emphasis on authenticity, deliverability, and simplicity.</p></div></div></section>
+
+          <section class="scene" id="scene-15" data-chapter="Journey"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_15_helena_ai_marketer_launch.png" alt="Helena AI marketer launch"></div><div class="vignette"></div><div class="scene-content"><div class="copy wide"><div class="date reveal">2026</div><h2 class="reveal d2">Helena</h2><p class="lead reveal d3">An autonomous AI marketer concept: strategy, campaigns, execution, and optimization.</p><div class="flow reveal d4"><div class="glass">Research</div><div class="glass">Plan</div><div class="glass">Launch</div><div class="glass">Optimize</div></div></div></div></section>
+
+          <section class="scene" id="scene-16" data-chapter="Products"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_16_product_universe_luxury_hub.png" alt="Product universe luxury hub"></div><div class="vignette"></div><div class="scene-content center"><div class="copy wide center"><div class="eyebrow reveal">Product Universe</div><h2 class="reveal d2">The ecosystem around data, email infrastructure, and AI marketing.</h2><div class="product-grid reveal d3"><article class="product-card glass"><span class="num">01</span><h3>Maximise.ai</h3><p>Visitor identification and lead generation.</p></article><article class="product-card glass"><span class="num">02</span><h3>Enrich APIs</h3><p>Contact and company data infrastructure.</p></article><article class="product-card glass"><span class="num">03</span><h3>InboxKit</h3><p>Mailbox infrastructure and deliverability.</p></article><article class="product-card glass"><span class="num">04</span><h3>AI Agents</h3><p>Autonomous marketing specialists.</p></article></div></div></div></section>
+
+          <section class="scene" id="scene-17" data-chapter="Products"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_17_maximise_product_visitor_to_lead.png" alt="Maximise product scene"></div><div class="vignette"></div><div class="scene-content right"><div class="copy narrow right"><div class="eyebrow reveal">Maximise.ai</div><h2 class="reveal d2">Anonymous visitors into usable lead data.</h2><div class="flow reveal d3"><div class="glass">Visitor Detected</div><div class="glass">Company Matched</div><div class="glass">Lead Enriched</div><div class="glass">Ready for Outreach</div></div></div></div></section>
+
+          <section class="scene" id="scene-18" data-chapter="Products"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_18_enrich_api_request_response.png" alt="Enrich API request response"></div><div class="vignette"></div><div class="scene-content"><div class="copy wide"><div class="eyebrow reveal">Enrich APIs</div><h2 class="reveal d2">Contact and company data infrastructure for modern GTM systems.</h2><div class="flow reveal d3"><div class="glass">API Request</div><div class="glass">Data Match</div><div class="glass">Verified Contact</div><div class="glass">Company Profile</div></div></div></div></section>
+
+          <section class="scene" id="scene-19" data-chapter="Products"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_19_inboxkit_mail_infrastructure.png" alt="InboxKit mail infrastructure"></div><div class="vignette"></div><div class="scene-content right"><div class="copy narrow right"><div class="eyebrow reveal">InboxKit</div><h2 class="reveal d2">Cold-email infrastructure built around deliverability and simplified operations.</h2><div class="flow reveal d3"><div class="glass">100 Mailboxes</div><div class="glass">Unified Replies</div><div class="glass">Deliverability</div><div class="glass">Workspace-ready</div></div></div></div></section>
+
+          <section class="scene" id="scene-20" data-chapter="Products"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_20_ai_agent_suite_luxury_cards.png" alt="AI agent suite luxury cards"></div><div class="vignette"></div><div class="scene-content center"><div class="copy wide center"><div class="eyebrow reveal">AI Agent Suite</div><h2 class="reveal d2">A 24/7 marketing team of specialized agents.</h2><div class="product-grid reveal d3"><article class="product-card glass"><span class="num">Helena</span><h3>Marketing</h3><p>Strategy and execution.</p></article><article class="product-card glass"><span class="num">Sam</span><h3>SEO / GEO</h3><p>Search and discovery.</p></article><article class="product-card glass"><span class="num">Kai</span><h3>Listening</h3><p>Brand and social signals.</p></article><article class="product-card glass"><span class="num">Angela</span><h3>Email</h3><p>Campaign workflows.</p></article></div></div></div></section>
+
+          <section class="scene" id="scene-21" data-chapter="Philosophy"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_21_bootstrapping_philosophy_quote_wall.png" alt="Bootstrapping philosophy quote wall"></div><div class="vignette"></div><div class="scene-content center"><div class="copy wide center"><div class="eyebrow reveal">Philosophy</div><p class="quote reveal d2"><span class="quote-mark">“</span>Bootstrapping teaches you things that raising can’t.<span class="quote-mark">”</span></p><p class="lead reveal d3 center">The story emphasizes discipline, speed, ownership, and building without chasing someone else’s dream.</p></div></div></section>
+
+          <section class="scene" id="scene-22" data-chapter="Philosophy"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_22_nine_people_zero_investors_team_grid.png" alt="Nine chairs luxury boardroom"></div><div class="vignette"></div><div class="scene-content"><div class="copy wide"><div class="eyebrow reveal">Culture</div><h2 class="reveal d2">Nine people. <span class="gold">Zero investors.</span></h2><p class="lead reveal d3">A lean team operating with intensity, autonomy, and high standards — “good enough” is not the goal.</p><div class="metric-grid reveal d4"><div class="metric glass"><strong><span class="counter" data-target="9">0</span></strong><span>Elite team members</span></div><div class="metric glass"><strong>0</strong><span>Outside investors</span></div></div></div></div></section>
+
+          <section class="scene" id="scene-23" data-chapter="Philosophy"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_23_data_as_moat_luxury_visual.png" alt="Data as moat luxury visual"></div><div class="vignette"></div><div class="scene-content right"><div class="copy narrow right"><div class="eyebrow reveal">Strategic Moat</div><h2 class="reveal d2">Data is not just an input. It becomes the moat.</h2><p class="lead reveal d3">In this concept, data forms the defensive layer around the product ecosystem — powering enrichment, marketing, and automation.</p></div></div></section>
+
+          <section class="scene" id="scene-24" data-chapter="Vision"><div class="scene-bg-wrap"><img class="scene-bg" src="assets/dubai_24_shots/shot_24_competition_vision_final_cta.png" alt="Final vision Dubai skyline CTA"></div><div class="vignette"></div><div class="scene-content"><div class="copy wide"><div class="eyebrow reveal">The Next Chapter</div><h2 class="reveal d2">From data APIs to autonomous AI marketers.</h2><p class="lead reveal d3">The story points toward AI-powered growth infrastructure — where data, deliverability, and marketing execution operate as one system.</p><div class="cta-row reveal d4"><button class="btn gold" data-jump="scene-01">Replay Story</button><button class="btn dark" data-jump="scene-08">Jump to Timeline</button><button class="btn dark" data-jump="scene-16">View Product Universe</button></div><div class="disclaimer glass reveal d4">Independent concept design. Not affiliated with Rahul Lakhaney, Enrich Labs, InboxKit, Maximise.ai, or related companies. All facts and public claims should be verified from original public sources before publishing.</div></div></div></section>
+
+        </div>
+      </div>
+    </section>
+  </main>
+<script>
+(() => {
+  const viewport = document.getElementById('scrollViewport');
+  const progress = document.getElementById('progressBar');
+  const scenes = [...document.querySelectorAll('.scene')];
+  const bgs = [...document.querySelectorAll('.scene-bg')];
+  const navButtons = [...document.querySelectorAll('.chapter-nav button')];
+  const chapterIndicator = document.getElementById('chapterIndicator');
+  const jumpers = [...document.querySelectorAll('[data-jump]')];
+  const timelineFill = document.getElementById('timelineFill');
+  const chapterMeta = { Intro: ['01','Intro'], Founder: ['02','Founder'], Journey: ['03','Journey'], Products: ['04','Products'], Philosophy: ['05','Philosophy'], Vision: ['06','Vision'] };
+
+  let target = 0;
+  let current = 0;
+  let maxScroll = 0;
+  let isTouching = false;
+
+  function measure(){
+    maxScroll = Math.max(1, viewport.scrollHeight - viewport.clientHeight);
+    target = viewport.scrollTop;
+    current = viewport.scrollTop;
+  }
+  measure();
+  setTimeout(() => viewport.focus({preventScroll:true}), 250);
+  window.addEventListener('resize', measure);
+
+  // Lenis-like internal smooth wheel. Native touch still works.
+  viewport.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    target += e.deltaY * 0.86;
+    target = Math.max(0, Math.min(maxScroll, target));
+  }, { passive:false });
+
+
+
+  viewport.addEventListener('keydown', (e) => {
+    const step = viewport.clientHeight * 0.72;
+    if(['ArrowDown','PageDown',' '].includes(e.key)) { e.preventDefault(); target = Math.min(maxScroll, target + step); }
+    if(['ArrowUp','PageUp'].includes(e.key)) { e.preventDefault(); target = Math.max(0, target - step); }
+    if(e.key === 'Home') { e.preventDefault(); target = 0; }
+    if(e.key === 'End') { e.preventDefault(); target = maxScroll; }
+  });
+
+  viewport.addEventListener('touchstart', () => isTouching = true, {passive:true});
+  viewport.addEventListener('touchend', () => { isTouching = false; target = viewport.scrollTop; current = viewport.scrollTop; }, {passive:true});
+  viewport.addEventListener('scroll', () => { if(isTouching){ target = viewport.scrollTop; current = viewport.scrollTop; update(); } }, {passive:true});
+
+  function scrollToScene(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    const top = el.offsetTop;
+    target = Math.max(0, Math.min(maxScroll, top));
+  }
+  navButtons.forEach(btn => btn.addEventListener('click', () => scrollToScene(btn.dataset.target)));
+  jumpers.forEach(el => el.addEventListener('click', () => scrollToScene(el.dataset.jump)));
+
+  function animateCounter(el){
+    if(el.dataset.done) return;
+    el.dataset.done = 'true';
+    const targetNum = Number(el.dataset.target || 0);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const start = performance.now();
+    const duration = 1450;
+    function tick(now){
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 4);
+      const value = Math.round(targetNum * eased);
+      el.textContent = prefix + value.toLocaleString() + suffix;
+      if(t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function update(){
+    const st = current;
+    const vh = viewport.clientHeight;
+    const pct = st / maxScroll;
+    progress.style.width = (pct * 100).toFixed(3) + '%';
+
+    let activeScene = scenes[0];
+    scenes.forEach((scene, i) => {
+      const top = scene.offsetTop;
+      const h = scene.offsetHeight;
+      const rel = (st + vh/2 - top) / h;
+      const visible = rel > -0.25 && rel < 1.25;
+      scene.classList.toggle('in-view', visible && rel > 0.02 && rel < .98);
+      if(st + vh * .45 >= top) activeScene = scene;
+
+      const bg = bgs[i];
+      if(bg && visible){
+        const y = (rel - .5) * 9.5;
+        const scale = 1.12 - Math.min(.06, Math.abs(rel-.5)*.035);
+        bg.style.transform = `translate3d(0, ${y}%, 0) scale(${scale})`;
+      }
+      if(visible){
+        scene.querySelectorAll('.counter').forEach(animateCounter);
+      }
+    });
+
+    const chapter = activeScene?.dataset.chapter || 'Intro';
+    if(chapterIndicator && chapterMeta[chapter]){
+      chapterIndicator.querySelector('span').textContent = chapterMeta[chapter][0];
+      chapterIndicator.querySelector('strong').textContent = chapterMeta[chapter][1];
+    }
+    navButtons.forEach(btn => {
+      const targetEl = document.getElementById(btn.dataset.target);
+      const isActive = targetEl && targetEl.dataset.chapter === chapter;
+      btn.classList.toggle('active', isActive);
+    });
+
+    const timelineStart = document.getElementById('scene-08').offsetTop;
+    const timelineEnd = document.getElementById('scene-15').offsetTop + document.getElementById('scene-15').offsetHeight;
+    const t = Math.max(0, Math.min(1, (st + vh*.35 - timelineStart) / (timelineEnd - timelineStart)));
+    if(timelineFill) timelineFill.style.setProperty('--fill', (t*100).toFixed(1)+'%');
+  }
+
+  function raf(){
+    if(!isTouching){
+      current += (target - current) * 0.095;
+      if(Math.abs(target - current) < 0.18) current = target;
+      viewport.scrollTop = current;
+    } else {
+      current = viewport.scrollTop;
+    }
+    update();
+    requestAnimationFrame(raf);
+  }
+  scenes.slice(0,2).forEach(s => s.classList.add('in-view'));
+  requestAnimationFrame(raf);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+# Asset Manifest
+
+01. assets/dubai_24_shots/shot_01_intro_ceo_enrich_labs.png
+02. assets/dubai_24_shots/shot_02_founder_picture_name_area.png
+03. assets/dubai_24_shots/shot_03_core_positioning_metrics_space.png
+04. assets/dubai_24_shots/shot_04_four_part_chapter_selection.png
+05. assets/dubai_24_shots/shot_05_founder_profile_card_background.png
+06. assets/dubai_24_shots/shot_06_founder_tags_keywords_space.png
+07. assets/dubai_24_shots/shot_07_large_quote_wall.png
+08. assets/dubai_24_shots/shot_08_timeline_intro_corridor.png
+09. assets/dubai_24_shots/shot_09_early_startup_wedding_app_phase.png
+10. assets/dubai_24_shots/shot_10_growth_leadership_corporate_phase.png
+11. assets/dubai_24_shots/shot_11_maximise_ai_launch_lead_growth.png
+12. assets/dubai_24_shots/shot_12_enrich_labs_data_foundation.png
+13. assets/dubai_24_shots/shot_13_inboxkit_rebuild_rebrand.png
+14. assets/dubai_24_shots/shot_14_arr_milestone_luxury_metric_wall.png
+15. assets/dubai_24_shots/shot_15_helena_ai_marketer_launch.png
+16. assets/dubai_24_shots/shot_16_product_universe_luxury_hub.png
+17. assets/dubai_24_shots/shot_17_maximise_product_visitor_to_lead.png
+18. assets/dubai_24_shots/shot_18_enrich_api_request_response.png
+19. assets/dubai_24_shots/shot_19_inboxkit_mail_infrastructure.png
+20. assets/dubai_24_shots/shot_20_ai_agent_suite_luxury_cards.png
+21. assets/dubai_24_shots/shot_21_bootstrapping_philosophy_quote_wall.png
+22. assets/dubai_24_shots/shot_22_nine_people_zero_investors_team_grid.png
+23. assets/dubai_24_shots/shot_23_data_as_moat_luxury_visual.png
+24. assets/dubai_24_shots/shot_24_competition_vision_final_cta.png
