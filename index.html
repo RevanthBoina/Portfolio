@@ -1,10 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html class="js-enabled" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rahul Lakhaney — Founder, CEO of Enrich Labs</title>
   <meta name="description" content="Rahul Lakhaney is a Dubai-based serial entrepreneur and Y Combinator W18 alumnus, building data-driven AI marketing infrastructure through Enrich Labs, Maximise.ai, and InboxKit." />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/framer-motion@11.0.8/dist/framer-motion.min.js"></script>
   <style>
     /* ========== CSS VARIABLES ========== */
     :root{
@@ -374,6 +375,30 @@
     .scene.exiting .reveal{opacity:0.3;transform:translateY(-30px) scale(0.98)}
     @media(max-width:980px){.chapter-indicator{left:14px;bottom:14px}.chapter-indicator strong{display:none}body{padding:1.5vh 2vw}.stage-top{font-size:10px}.luxury-frame{height:90vh;min-height:0;border-radius:22px}.scene{min-height:680px}.chapter-nav{display:none}.scene-content{padding:34px;align-items:flex-end!important;justify-content:flex-start!important;text-align:left!important}.scene-content.split{display:flex;flex-direction:column;justify-content:center!important;align-items:flex-start!important}.chapter-grid,.product-grid,.metric-grid{grid-template-columns:1fr 1fr}.profile-card{width:100%;min-height:260px}.flow{grid-template-columns:1fr 1fr}h1,.mega{font-size:50px}h2{font-size:42px}.quote{font-size:42px}}
     @media(max-width:620px){.stage-top span:last-child{display:none}.luxury-frame{height:91vh;border-radius:18px}.scene{min-height:720px}.scene-content{padding:24px}.chapter-grid,.product-grid,.metric-grid,.flow{grid-template-columns:1fr}.lead{font-size:16px}.copy{max-width:100%}.scene-bg{object-position:center}.metric strong{font-size:34px}.timeline-line{left:22px}.quote{font-size:36px}}
+
+    /* ========== JS FALLBACK & ANIMATION BASE ========== */
+    .js-enabled .reveal {
+      opacity: 0;
+      transform: translateY(50px) scale(0.97);
+      filter: blur(8px);
+    }
+
+    /* ========== REDUCED MOTION ACCESSIBILITY ========== */
+    .reduced-motion .reveal,
+    .reduced-motion .scene-bg,
+    .reduced-motion .counter {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+      transition: none !important;
+    }
+
+    /* ========== HARDWARE ACCELERATION HINTS ========== */
+    .reveal,
+    .scene-bg {
+      will-change: transform, opacity;
+      contain: paint; /* For filter animations */
+    }
   </style>
 </head>
 <body>
@@ -456,177 +481,139 @@
     </section>
   </main>
 <script>
-(() => {
-  // Elements
-  const viewport = document.getElementById('scrollViewport');
-  const progress = document.getElementById('progressBar');
-  const scenes = [...document.querySelectorAll('.scene')];
-  const bgs = [...document.querySelectorAll('.scene-bg')];
-  const navButtons = [...document.querySelectorAll('.chapter-nav button')];
-  const mobileNavButtons = [...document.querySelectorAll('.mobile-nav button')];
-  const chapterIndicator = document.getElementById('chapterIndicator');
-  const jumpers = [...document.querySelectorAll('[data-jump]')];
-  const timelineFill = document.getElementById('timelineFill');
-  const chapterMeta = { Intro: ['01','Intro'], Founder: ['02','Founder'], Journey: ['03','Journey'], Products: ['04','Products'], Philosophy: ['05','Philosophy'], Vision: ['06','Vision'] };
+// Wait for Framer Motion to load
+if (window.framerMotion) {
+  initAnimations();
+} else {
+  // Fallback: wait for load
+  window.addEventListener('load', initAnimations);
+}
 
-  let target = 0;
-  let current = 0;
-  let maxScroll = 0;
-  let isTouching = false;
-
-  // Screen reader announcement
-  function announceChapter(chapter) {
-    const announcement = document.createElement('div');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('aria-atomic', 'true');
-    announcement.className = 'sr-only';
-    announcement.textContent = `Now viewing: ${chapter}`;
-    document.body.appendChild(announcement);
-    setTimeout(() => announcement.remove(), 1000);
+function initAnimations() {
+  // REDUCED MOTION ACCESSIBILITY CHECK
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('reduced-motion');
+    // Add JS enabled class for CSS fallback
+    document.documentElement.classList.add('js-enabled');
+    return; // Skip all JS animations
   }
 
-  function measure(){
-    maxScroll = Math.max(1, viewport.scrollHeight - viewport.clientHeight);
-    target = viewport.scrollTop;
-    current = viewport.scrollTop;
-  }
-  measure();
-  setTimeout(() => viewport.focus({preventScroll:true}), 250);
-  window.addEventListener('resize', measure);
+  // ADD JS ENABLED CLASS FOR CSS FALLBACK
+  document.documentElement.classList.add('js-enabled');
 
-  // Smooth internal scrolling with momentum.
-  viewport.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    target += e.deltaY * 0.86;
-    target = Math.max(0, Math.min(maxScroll, target));
-  }, { passive:false });
+  const { animate } = window.framerMotion;
 
-  viewport.addEventListener('keydown', (e) => {
-    const step = viewport.clientHeight * 0.72;
-    if(['ArrowDown','PageDown',' '].includes(e.key)) { e.preventDefault(); target = Math.min(maxScroll, target + step); }
-    if(['ArrowUp','PageUp'].includes(e.key)) { e.preventDefault(); target = Math.max(0, target - step); }
-    if(e.key === 'Home') { e.preventDefault(); target = 0; }
-    if(e.key === 'End') { e.preventDefault(); target = maxScroll; }
-  });
+  // Get elements
+  const revealElements = document.querySelectorAll('.reveal');
+  const sceneBgElements = document.querySelectorAll('.scene-bg');
+  const counterElements = document.querySelectorAll('.counter');
 
-  viewport.addEventListener('touchstart', () => isTouching = true, {passive:true});
-  viewport.addEventListener('touchend', () => { isTouching = false; target = viewport.scrollTop; current = viewport.scrollTop; }, {passive:true});
-  viewport.addEventListener('scroll', () => { if(isTouching){ target = viewport.scrollTop; current = viewport.scrollTop; update(); } }, {passive:true});
+  // Initialize counters with framer-motion
+  counterElements.forEach(counter => {
+    if (counter.dataset.animated) return;
 
-  function scrollToScene(id){
-    const el = document.getElementById(id);
-    if(!el) return;
-    const top = el.offsetTop;
-    target = Math.max(0, Math.min(maxScroll, top));
-    // Announce chapter change
-    const chapter = el.dataset.chapter;
-    if (chapter) announceChapter(chapter);
-  }
+    const target = parseFloat(counter.dataset.target) || 0;
+    const prefix = counter.dataset.prefix || '';
+    const suffix = counter.dataset.suffix || '';
 
-  // Desktop nav buttons
-  navButtons.forEach(btn => btn.addEventListener('click', () => scrollToScene(btn.dataset.target)));
-  jumpers.forEach(el => el.addEventListener('click', () => scrollToScene(el.dataset.jump)));
-
-  // Mobile nav buttons
-  mobileNavButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.dataset.target;
-      scrollToScene(targetId);
-      // Update ARIA states
-      mobileNavButtons.forEach(b => b.setAttribute('aria-current', 'false'));
-      btn.setAttribute('aria-current', 'true');
-    });
-  });
-
-  function animateCounter(el){
-    if(el.dataset.done) return;
-    el.dataset.done = 'true';
-    const targetNum = Number(el.dataset.target || 0);
-    const prefix = el.dataset.prefix || '';
-    const suffix = el.dataset.suffix || '';
-    const start = performance.now();
-    const duration = 1450;
-    function tick(now){
-      const t = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - t, 4);
-      const value = Math.round(targetNum * eased);
-      el.textContent = prefix + value.toLocaleString() + suffix;
-      if(t < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-
-  function update(){
-    const st = current;
-    const vh = viewport.clientHeight;
-    const pct = st / maxScroll;
-    progress.style.width = (pct * 100).toFixed(3) + '%';
-
-    let activeScene = scenes[0];
-    scenes.forEach((scene, i) => {
-      const top = scene.offsetTop;
-      const h = scene.offsetHeight;
-      const rel = (st + vh/2 - top) / h;
-      const visible = rel > -0.3 && rel < 1.3;
-      scene.classList.toggle('in-view', visible && rel > 0.02 && rel < .98);
-      if(st + vh * .45 >= top) activeScene = scene;
-
-      const bg = bgs[i];
-      if(bg){
-        if(visible){
-          // Enhanced continuous motion parallax with smooth easing
-          const y = (rel - 0.5) * 8;  // Increased movement for more dramatic effect
-          const scale = 1.15 - Math.min(0.08, Math.abs(rel - 0.5) * 0.04);  // Enhanced scale
-          // Combine with Ken Burns CSS animation via transform
-          bg.style.transform = `translate3d(0, ${y}%, 0) scale(${scale})`;
-          bg.style.opacity = '1';
-        } else {
-          bg.style.opacity = '0';
+    // Animate the counter from 0 to target
+    animate(counter,
+      { value: target },
+      {
+        duration: 1.5,
+        ease: [0.25, 0.46, 0.45, 0.94], // cubic-bezier(0.25,0.46,0.45,0.94)
+        update: (v) => {
+          counter.textContent = prefix + Math.floor(v.value).toLocaleString() + suffix;
         }
       }
-      if(visible){
-        scene.querySelectorAll('.counter').forEach(animateCounter);
+    );
+
+    counter.dataset.animated = 'true';
+  });
+
+  // Scroll-based animations for reveal elements and parallax
+  let ticking = false;
+  const updateAnimations = () => {
+    const scrollY = window.scrollY;
+    const viewportHeight = window.innerHeight;
+
+    // Animate reveal elements
+    revealElements.forEach((element, index) => {
+      const elementTop = element.getBoundingClientRect().top + scrollY;
+      const elementHeight = element.offsetHeight;
+      const elementBottom = elementTop + elementHeight;
+
+      const isVisible = elementTop < scrollY + viewportHeight * 0.8 &&
+                       elementBottom > scrollY + viewportHeight * 0.2;
+
+      if (isVisible && !element.dataset.animating) {
+        element.dataset.animating = 'true';
+
+        // Animate in with framer-motion
+        animate(element,
+          {
+            opacity: [0, 1],
+            y: [50, 0],
+            filter: ['blur(8px)', 'blur(0)']
+          },
+          {
+            duration: 0.8,
+            ease: [0.25, 0.46, 0.45, 0.94],
+            delay: index * 0.05 + (element.classList.contains('d2') ? 0.12 :
+                             element.classList.contains('d3') ? 0.24 :
+                             element.classList.contains('d4') ? 0.36 : 0)
+          }
+        );
       }
     });
 
-    const chapter = activeScene?.dataset.chapter || 'Intro';
-    if(chapterIndicator && chapterMeta[chapter]){
-      chapterIndicator.querySelector('span').textContent = chapterMeta[chapter][0];
-      chapterIndicator.querySelector('strong').textContent = chapterMeta[chapter][1];
-    }
-    navButtons.forEach(btn => {
-      const targetEl = document.getElementById(btn.dataset.target);
-      const isActive = targetEl && targetEl.dataset.chapter === chapter;
-      btn.classList.toggle('active', isActive);
-    });
-    // Update mobile nav button states
-    mobileNavButtons.forEach(btn => {
-      const targetEl = document.getElementById(btn.dataset.target);
-      const isActive = targetEl && targetEl.dataset.chapter === chapter;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-current', isActive ? 'true' : 'false');
+    // Parallax effect for scene backgrounds
+    sceneBgElements.forEach((bg, index) => {
+      const scene = document.getElementById(`scene-${String(index + 1).padStart(2, '0')}`);
+      if (!scene) return;
+
+      const sceneTop = scene.getBoundingClientRect().top + scrollY;
+      const sceneHeight = scene.offsetHeight;
+
+      const scrollProgress = (scrollY - sceneTop + viewportHeight) / (sceneHeight + viewportHeight);
+      const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
+
+      const parallaxY = (clampedProgress - 0.5) * 40;
+      const parallaxScale = 1.15 - Math.abs(clampedProgress - 0.5) * 0.08;
+
+      // Use framer-motion's set? Actually, we can just set the style because it's changing every frame.
+      // But we can use animate with a very short duration? Or just set.
+      // Since it's changing every frame, we'll set the style directly.
+      bg.style.transform = `translate3d(0, ${parallaxY}px, 0) scale(${parallaxScale})`;
+      bg.style.willChange = 'transform';
     });
 
-    const timelineStart = document.getElementById('scene-08').offsetTop;
-    const timelineEnd = document.getElementById('scene-15').offsetTop + document.getElementById('scene-15').offsetHeight;
-    const t = Math.max(0, Math.min(1, (st + vh*.35 - timelineStart) / (timelineEnd - timelineStart)));
-    if(timelineFill) timelineFill.style.setProperty('--fill', (t*100).toFixed(1)+'%');
-  }
+    ticking = false;
+  };
 
-  function raf(){
-    if(!isTouching){
-      current += (target - current) * 0.095;
-      if(Math.abs(target - current) < 0.18) current = target;
-      viewport.scrollTop = current;
-    } else {
-      current = viewport.scrollTop;
+  const requestTick = () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateAnimations();
+        ticking = true;
+      });
     }
-    update();
-    requestAnimationFrame(raf);
-  }
-  scenes.slice(0,2).forEach(s => s.classList.add('in-view'));
-  requestAnimationFrame(raf);
-})();
+  };
+
+  window.addEventListener('scroll', requestTick, { passive: true });
+  window.addEventListener('resize', requestTick, { passive: true });
+
+  // Initial call
+  requestTick();
+
+  // Initialize first few scenes as in-view
+  const initialScenes = document.querySelectorAll('.scene');
+  initialScenes.forEach((scene, index) => {
+    if (index < 2) {
+      scene.classList.add('in-view');
+    }
+  });
+}
 </script>
 </body>
 </html>
